@@ -27,66 +27,17 @@ print(superhero.get_name())
 print(superhero.get_health_points())
 print(superhero.__len__())
 
-
-class SuperHero:
-    people = 'people'
-
-    def __init__(self, name, nickname, superpower, health_points, catchphrase):
-        self.name = name
-
-        self.nickname = nickname
-
-        self.superpower = superpower
-
-        self.health_points = health_points
-
-        self.catchphrase = catchphrase
-
-    def print_name(self):
-        print(self.name)
-
-    def health_2(self):
-        self.health_points *= 2
-
-        print(f"Updated health points: {self.health_points}")
-
-    def __str__(self):
-        return f"Nickname -> {self.nickname} \n" \
-               f"SuperPower -> {self.superpower} \n" \
-               f"Health -> {self.health_points}"
-
-    def __len__(self):
-        return len(self.catchphrase)
-
-
-barbie = SuperHero("Aijamal", "aijamal.08", "Screaming", 200, "Baidoolot Yilak")
-
-barbie.print_name()
-
-barbie.health_2()
-
-print(barbie)
-
-print(len(barbie))
-
-print()
-
-
 class StoneHero(SuperHero):
     people = 'people'
 
-    def __init__(self, name, nickname, superpower, health_points, catchphrase, damage=False, fly=False):
+    def __init__(self, name, nickname, superpower, health_points, catchphrase, damage, fly=False):
         super().__init__(name, nickname, superpower, health_points, catchphrase)
-
         self.damage = damage
-
         self.fly = fly
 
-    def health_2(self):
+    def get_health_points(self):
         self.fly = True
-
         self.health_points **= 2
-
         print(f"Updated health points: {self.health_points}")
 
     def method_fly(self):
@@ -96,18 +47,14 @@ class StoneHero(SuperHero):
 class CosmoHero(SuperHero):
     people = 'people'
 
-    def __init__(self, name, nickname, superpower, health_points, catchphrase, damage=False, fly=False):
+    def __init__(self, name, nickname, superpower, health_points, catchphrase, damage, fly=False):
         super().__init__(name, nickname, superpower, health_points, catchphrase)
-
         self.damage = damage
-
         self.fly = fly
 
-    def health_2(self):
+    def get_health_points(self):
         self.fly = True
-
         self.health_points **= 2
-
         print(f"Updated health points: {self.health_points}")
 
     def method_fly(self):
@@ -115,38 +62,27 @@ class CosmoHero(SuperHero):
 
 
 stoneHero = StoneHero('tor', 'z', 'Chris Hemsworth', 500, 'loki lox!!!', 100)
-
-print(stoneHero)
-
-stoneHero.health_2()
-
+stoneHero.get_health_points()
 stoneHero.method_fly()
 
-print()
+
 
 cosmoHero = CosmoHero('flash', 'bari', 'speed', 700, 'speeeeed', 150)
-
-print(cosmoHero)
-
-cosmoHero.health_2()
-
+cosmoHero.get_health_points()
 cosmoHero.method_fly()
-
-print()
 
 
 class Villain(CosmoHero):
 
-    def __init__(self, name, nickname, superpower, health_points, catchphrase):
-        super().__init__(name, nickname, superpower, health_points, catchphrase)
-
+    def __init__(self, name, nickname, superpower, health_points, catchphrase, damage, fly=False):
+        CosmoHero.__init__(name, nickname, superpower, health_points, catchphrase, damage, fly)
         SuperHero.people = 'monster'
 
     def gen_X(self):
         pass
 
-    def crit(self, hero):
-        return hero.damage ** 2
+    def crit(self):
+        return self.damage ** 2
 
 
 villain = Villain('batman', 'bat', 'beast', 1000, 'All heroes must to die!!!')
